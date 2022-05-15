@@ -2,22 +2,13 @@
 
 <html xmlns:th="http://www.thymeleaf.org">
 
-<head th:fragment="header">
-	<!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-	
-	<link rel="stylesheet" th:href="@{/css/formatting.css}">
-	
-	<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-
-</head>
+<!-- Get the header from the layouts.html -->
+<head th:replace="layouts :: header"></head>
 
 <body>
+
+<!-- Get the navbar from the layouts.html -->
+<nav th:replace="layouts :: navbar"></nav> 
 
 <div class="container">
 	<form action="/projects/save" method="POST" th:object="${project}">
