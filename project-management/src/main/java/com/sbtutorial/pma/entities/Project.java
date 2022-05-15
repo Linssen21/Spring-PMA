@@ -1,9 +1,17 @@
 package com.sbtutorial.pma.entities;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+/**
+ * 
+ * @author Linssen
+ * Mark the class with @Entity annotation so the spring boot will know that this is an entity
+ * and will automatically create a database for us
+ */
+@Entity
 public class Project {
 	
 // Set the attributes
