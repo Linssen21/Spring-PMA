@@ -1,9 +1,12 @@
 package com.sbtutorial.pma.entities;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 /**
  * 
@@ -29,11 +32,28 @@ public class Project {
 	
 	private String description;
 	
+	 
+	/**
+	 *  @OneToMany annotation Generates a table for the Project and Employee
+	 *  (mappedBy = "project) this arguments will let us need to define a property on the Employee, this also remove the generated database
+	 *  
+	 */
+	@OneToMany(mappedBy = "project")
+	private List<Employee> employees;
+	
 	// Constructors
 	public Project() {
 		
 	}
 	
+	public List<Employee> getEmployees() {
+		return employees;
+	}
+
+	public void setEmployees(List<Employee> employees) {
+		this.employees = employees;
+	}
+
 	public Project( String name, String stage, String description) {
 		super();
 		this.name = name;

@@ -1,5 +1,6 @@
 package com.sbtutorial.pma.controllers;
 
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +9,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.sbtutorial.pma.dao.EmployeeRepository;
 import com.sbtutorial.pma.dao.ProjectRepository;
 import com.sbtutorial.pma.entities.Employee;
 import com.sbtutorial.pma.entities.Project;
@@ -22,6 +25,9 @@ public class ProjectController {
 	 */
 	@Autowired
 	ProjectRepository proRepo;
+	
+	@Autowired
+	EmployeeRepository employeeRepo;
 	
 	@GetMapping
 	public String displayProjects(Model model) {
@@ -39,16 +45,25 @@ public class ProjectController {
 		
 		// Bind the form with the Project Model
 		Project aProject = new Project();
+		// Get List of employees
+		List<Employee> employees = employeeRepo.findAll();
 		model.addAttribute("project", aProject);
-		
+		model.addAttribute("allEmployees", employees);
 		// Generate the view with new-project.html
 		return "projects/new-project";
 	}
 	
 	@PostMapping("/save")
-	public String createProject(Project project, Model model) {
+	public String createProject(Project project, @RequestParam List<Long> employees ,Model model) {
 		// this should handle saving to the database
 		proRepo.save(project);
+		// Find all by id based on the employee
+		Iterable<Employee> chosenEmployee = employeeRepo.findAllById(employees);
+		// Loop over the chosenEmployee and set the Project on the Employee table / Update the employee to set its Project Id field
+		for(Employee emp : chosenEmployee) {
+			emp.setProject(project);
+			employeeRepo.save(emp);
+		}
 		
 		// use a redirect to prevent duplicate submissions
 		return "redirect:/projects";
