@@ -56,14 +56,17 @@ public class ProjectController {
 	@PostMapping("/save")
 	public String createProject(Project project, @RequestParam List<Long> employees ,Model model) {
 		// this should handle saving to the database
+		// Automatically save the project with the List of Employees
 		proRepo.save(project);
 		// Find all by id based on the employee
-		Iterable<Employee> chosenEmployee = employeeRepo.findAllById(employees);
-		// Loop over the chosenEmployee and set the Project on the Employee table / Update the employee to set its Project Id field
-		for(Employee emp : chosenEmployee) {
-			emp.setProject(project);
-			employeeRepo.save(emp);
-		}
+//		Iterable<Employee> chosenEmployee = employeeRepo.findAllById(employees);
+//		// Loop over the chosenEmployee and set the Project on the Employee table / Update the employee to set its Project Id field
+//		for(Employee emp : chosenEmployee) {
+//			emp.setProject(project);
+//			employeeRepo.save(emp);
+//		}
+		
+	
 		
 		// use a redirect to prevent duplicate submissions
 		return "redirect:/projects";

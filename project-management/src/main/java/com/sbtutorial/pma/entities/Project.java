@@ -2,10 +2,15 @@ package com.sbtutorial.pma.entities;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 /**
@@ -38,7 +43,20 @@ public class Project {
 	 *  (mappedBy = "project) this arguments will let us need to define a property on the Employee, this also remove the generated database
 	 *  
 	 */
-	@OneToMany(mappedBy = "project")
+//	@OneToMany(mappedBy = "project")
+	
+	/**
+	 * @ManyToMany Annotation set the Relationship 
+	 * of Projects to have Many (Employee)
+	 * Set the Cascade to the Employee table because it is set with Many
+	 * Tell Hibernate that we will have a many to many Relationship with Project
+	 */
+	@ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST }, fetch = FetchType.LAZY)
+	@JoinTable(
+		name = "project_employee", 
+		joinColumns = @JoinColumn(name = "project_id"), 
+		inverseJoinColumns = @JoinColumn(name = "employee_id")
+	)
 	private List<Employee> employees;
 	
 	// Constructors
