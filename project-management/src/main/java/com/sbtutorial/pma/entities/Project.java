@@ -1,5 +1,6 @@
 package com.sbtutorial.pma.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -33,7 +34,7 @@ public class Project {
 	private long projectId;
 	private String name;
 	
-	private String stage; // NOTSTARTED, COMPLETE, INPROGRESS
+	private String stage; 
 	
 	private String description;
 	
@@ -112,7 +113,14 @@ public class Project {
 	}
 	
 	
-	
+	public void addEmployee(Employee emp) {
+		// If employees is null create a new Array list
+		if(employees == null) {
+			employees = new ArrayList<>();
+		}
+		// Add the given employee
+		employees.add(emp);
+	}
 	
 	
 
