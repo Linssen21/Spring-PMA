@@ -25,8 +25,9 @@ import javax.persistence.ManyToOne;
 public class Employee {
 	
 //	Fields
+//	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long employeeId;
 	
 	private String firstName;

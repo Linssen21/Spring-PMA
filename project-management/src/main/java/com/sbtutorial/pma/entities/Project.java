@@ -29,8 +29,10 @@ public class Project {
  * Parts of the Hibernate 
  * This annotations used to automatically map to a database table
  */
+	
+//	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long projectId;
 	private String name;
 	
