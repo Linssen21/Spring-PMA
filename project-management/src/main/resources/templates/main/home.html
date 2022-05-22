@@ -31,8 +31,12 @@
 				</table>
 			</div>
 			<div class="col-md-5">
-			<canvas id="myPieChart" height="50" width="50"></canvas>
-		</div>
+				<canvas id="myPieChart" height="50" width="50"></canvas>
+				<script type="text/javascript">
+				// Make projectStatusCount Accessible to Javascript File
+					const chartData = "[[${projectStatusCount}]]"
+				</script>
+			</div>
 	</div>
 	<div class="row">
 	<div class="col-md-7">
