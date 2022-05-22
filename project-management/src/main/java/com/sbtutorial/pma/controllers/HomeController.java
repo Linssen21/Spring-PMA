@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import com.sbtutorial.pma.dao.EmployeeRepository;
 import com.sbtutorial.pma.dao.ProjectRepository;
+import com.sbtutorial.pma.dto.EmployeeProject;
 import com.sbtutorial.pma.entities.Employee;
 import com.sbtutorial.pma.entities.Project;
 
@@ -33,8 +34,12 @@ public class HomeController {
 		model.addAttribute("projectsList", projects);
 		
 		 // Overrides the findAll to return a list of Project
-		List<Employee> employees = employeeRepo.findAll();
-		model.addAttribute("employeesList", employees);
+//		List<Employee> employees = employeeRepo.findAll();
+//		model.addAttribute("employeesList", employees);
+		
+		// Execute the Custom Query from the (DAO) Data Access Object
+		List<EmployeeProject> employeesProjectCount = employeeRepo.employeeProject();
+		model.addAttribute("employeesProjectCount", employeesProjectCount);
 		
 		// Render the home.html
 		return "main/home";
