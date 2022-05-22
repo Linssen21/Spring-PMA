@@ -17,15 +17,20 @@ import com.sbtutorial.pma.dto.ChartData;
 import com.sbtutorial.pma.dto.EmployeeProject;
 import com.sbtutorial.pma.entities.Employee;
 import com.sbtutorial.pma.entities.Project;
+import com.sbtutorial.pma.springExample.Car;
 
 @Controller
 public class HomeController {
+	
+	@Autowired
+	Car car;
 	
 	/**
 	 * Inject the Project Repository to this controller
 	 */
 	@Autowired
 	ProjectRepository proRepo;
+	
 	
 	@Autowired
 	EmployeeRepository employeeRepo;
