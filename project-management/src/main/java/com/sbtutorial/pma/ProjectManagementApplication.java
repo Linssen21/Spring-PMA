@@ -18,7 +18,12 @@ import com.sbtutorial.pma.springExample.Doors;
 import com.sbtutorial.pma.springExample.Engine;
 import com.sbtutorial.pma.springExample.Tires;
 
-@SpringBootApplication
+/**
+ * 
+ * @author Linssen
+ * scanBasePackages Scan / Loads packages outside of pma package, must add the "com.sbtutorial.pma" first before the "com.sbtutorial.utils" packages
+ */
+@SpringBootApplication(scanBasePackages = {"com.sbtutorial.pma", "com.sbtutorial.utils"})
 public class ProjectManagementApplication {
 	
 	
