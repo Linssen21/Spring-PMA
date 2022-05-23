@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,8 +23,14 @@ import com.sbtutorial.pma.springExample.Car;
 @Controller
 public class HomeController {
 	
-	@Autowired
-	Car car;
+//	@Autowired
+//	Car car;
+	
+	/**
+	 * Get The value from the application.properties
+	 */
+	@Value("${version}")
+	private String version;
 	
 	/**
 	 * Inject the Project Repository to this controller
@@ -37,6 +44,9 @@ public class HomeController {
 	
 	@GetMapping("/")
 	public String displayHome(Model model) throws JsonProcessingException {
+			
+		model.addAttribute("versionNumber", version);
+		
 		Map<String, Object> map = new HashMap<>();
 		
 		 // Overrides the findAll to return a list of Project
