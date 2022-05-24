@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 
 /**
  * 
@@ -31,8 +32,10 @@ public class Project {
  */
 	
 //	@GeneratedValue(strategy=GenerationType.AUTO)
+//	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@SequenceGenerator(name="project_seq", sequenceName="project_seq", allocationSize=1)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "project_seq")
 	private long projectId;
 	private String name;
 	

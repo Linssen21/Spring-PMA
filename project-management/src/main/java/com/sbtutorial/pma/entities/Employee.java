@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 
 
 /**
@@ -26,8 +27,11 @@ public class Employee {
 	
 //	Fields
 //	@GeneratedValue(strategy=GenerationType.AUTO)
+//	@GeneratedValue(strategy=GenerationType.IDENTITY)
+// Change Generated Value to Sequence for performance because of batch sequence or batch processing
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@SequenceGenerator(name="employee_seq", sequenceName="employee_seq", allocationSize=1)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "employee_seq")
 	private long employeeId;
 	
 	private String firstName;
