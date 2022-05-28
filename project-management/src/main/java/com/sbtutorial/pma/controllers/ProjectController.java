@@ -15,6 +15,8 @@ import com.sbtutorial.pma.dao.EmployeeRepository;
 import com.sbtutorial.pma.dao.ProjectRepository;
 import com.sbtutorial.pma.entities.Employee;
 import com.sbtutorial.pma.entities.Project;
+import com.sbtutorial.pma.services.EmployeeService;
+import com.sbtutorial.pma.services.ProjectService;
 
 @Controller
 @RequestMapping("/projects")
@@ -24,15 +26,15 @@ public class ProjectController {
 	 * Inject an instance of the Project Repository
 	 */
 	@Autowired
-	ProjectRepository proRepo;
+	ProjectService projectService;
 	
 	@Autowired
-	EmployeeRepository employeeRepo;
+	EmployeeService employeeService;
 	
 	@GetMapping
 	public String displayProjects(Model model) {
 		 // Overrides the findAll to return a list of Project
-		List<Project> projects = proRepo.findAll();
+		List<Project> projects = projectService.getAll();
 		model.addAttribute("projectsList", projects);
 		
 		return "projects/list-projects";
@@ -46,7 +48,7 @@ public class ProjectController {
 		// Bind the form with the Project Model
 		Project aProject = new Project();
 		// Get List of employees
-		List<Employee> employees = employeeRepo.findAll();
+		List<Employee> employees = employeeService.getAll();
 		model.addAttribute("project", aProject);
 		model.addAttribute("allEmployees", employees);
 		// Generate the view with new-project.html
@@ -57,7 +59,7 @@ public class ProjectController {
 	public String createProject(Project project, @RequestParam List<Long> employees ,Model model) {
 		// this should handle saving to the database
 		// Automatically save the project with the List of Employees
-		proRepo.save(project);
+		projectService.save(project);
 		// Find all by id based on the employee
 //		Iterable<Employee> chosenEmployee = employeeRepo.findAllById(employees);
 //		// Loop over the chosenEmployee and set the Project on the Employee table / Update the employee to set its Project Id field

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.sbtutorial.pma.dao.EmployeeRepository;
 import com.sbtutorial.pma.entities.Employee;
+import com.sbtutorial.pma.services.EmployeeService;
 
 @Controller
 @RequestMapping("/employees")
@@ -18,17 +19,17 @@ public class EmployeeController {
 
 	/**
 	 * Field Injection
-	 * Inject an instance of the Employee Repository
+	 * Inject an instance of the Employee Service
 	 */
-	@Autowired
-	EmployeeRepository employeeRepo;
 	
-
+	@Autowired
+	EmployeeService empService;
+	
 
 	@GetMapping
 	public String displayEmployees(Model model) {
 		 // Overrides the findAll to return a list of Project
-		List<Employee> employees = employeeRepo.findAll();
+		List<Employee> employees = empService.getAll();
 		model.addAttribute("employeesList", employees);
 		
 		return "employees/list-employees";
@@ -49,7 +50,7 @@ public class EmployeeController {
 	@PostMapping("/save")
 	public String createEmployee(Employee employee, Model model) {
 		// save to the database
-		employeeRepo.save(employee);
+		empService.save(employee);
 		
 		// Redirect after submission
 		return "redirect:/employees";

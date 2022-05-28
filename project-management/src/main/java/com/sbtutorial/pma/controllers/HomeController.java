@@ -18,6 +18,8 @@ import com.sbtutorial.pma.dto.ChartData;
 import com.sbtutorial.pma.dto.EmployeeProject;
 import com.sbtutorial.pma.entities.Employee;
 import com.sbtutorial.pma.entities.Project;
+import com.sbtutorial.pma.services.EmployeeService;
+import com.sbtutorial.pma.services.ProjectService;
 import com.sbtutorial.pma.springExample.Car;
 
 @Controller
@@ -33,14 +35,14 @@ public class HomeController {
 	private String version;
 	
 	/**
-	 * Inject the Project Repository to this controller
+	 * Inject the Project Service to this controller
 	 */
 	@Autowired
-	ProjectRepository proRepo;
+	ProjectService projectService;
 	
 	
 	@Autowired
-	EmployeeRepository employeeRepo;
+	EmployeeService employeeService;
 	
 	@GetMapping("/")
 	public String displayHome(Model model) throws JsonProcessingException {
@@ -50,12 +52,12 @@ public class HomeController {
 		Map<String, Object> map = new HashMap<>();
 		
 		 // Overrides the findAll to return a list of Project
-		List<Project> projects = proRepo.findAll();
+		List<Project> projects = projectService.getAll();
 		 //Pass the data projectsList
 		model.addAttribute("projectsList", projects);
 		
 		// Get Project Status
-		List<ChartData> projectData = proRepo.getProjectStatus();
+		List<ChartData> projectData = projectService.getProjectStatus();
 		// Convert projectData Object into a JSON structure for Chart JS
 		ObjectMapper objectMapper = new ObjectMapper();
 		String jsonString = objectMapper.writeValueAsString(projectData);
@@ -67,7 +69,7 @@ public class HomeController {
 //		model.addAttribute("employeesList", employees);
 		
 		// Execute the Custom Query from the (DAO) Data Access Object
-		List<EmployeeProject> employeesProjectCount = employeeRepo.employeeProject();
+		List<EmployeeProject> employeesProjectCount = employeeService.employeeProjects();
 		model.addAttribute("employeesProjectCount", employeesProjectCount);
 		
 		
