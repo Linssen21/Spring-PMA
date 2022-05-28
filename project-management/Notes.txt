@@ -1,2 +1,58 @@
 // Research about Environment Variables in Spring
 java -jar target/project-management-0.0.1-SNAPSHOT.jar
+
+Docker Commands
+docker pull ubuntu:latest
+docker images
+docker container run -it ubuntu
+
+docker container ls
+
+// List Previously run image
+docker container ls -a
+
+
+Create Images
+docker container commit -a "Linssen linssen001@gmail.com" abe ubuntu-jdk
+
+Images is a snapshot
+Container is the running instance of the image
+
+// Install jdk on ubuntu
+apt-get update && apt-get install openjdk-17-jdk
+
+// Move files
+mv Simple-service.jar dockerwork
+// Run a jar file
+java -jar simple-service
+
+
+// Building the docker image with the dockerfile
+docker image build -t java-service-from-dockerfile .
+
+// Run the docker image container
+docker run java-service-from-dockerfile
+
+// Create a docker file using ubuntu
+vi Dockerfile
+
+// Press i to Insert
+
+// Press ESC and type :wq to save and exit
+
+docker image build -t pma-from-dockerfile .
+
+docker container run p
+ma-from-dockerfile
+
+// Command to access outside the container
+docker container run -d -p 8989:8080 pma-from-dockerfile
+
+docker container ps
+
+docker container ls
+
+docker container logs 31f
+
+// Stop container
+docker stop 31f
