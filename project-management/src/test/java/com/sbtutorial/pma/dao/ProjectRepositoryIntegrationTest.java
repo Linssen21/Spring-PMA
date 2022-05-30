@@ -36,7 +36,7 @@ import com.sbtutorial.pma.entities.Project;
 	@Sql(executionPhase = ExecutionPhase.BEFORE_TEST_METHOD, scripts = {"classpath:schema.sql", "classpath:data.sql"}), 
 	@Sql(executionPhase = ExecutionPhase.AFTER_TEST_METHOD, scripts = "classpath:drop.sql")
 })
-@TestPropertySource("classpath:application_test.properties")
+//@TestPropertySource("classpath:application_test.properties")
 public class ProjectRepositoryIntegrationTest {
 	@Autowired
 	ProjectRepository proRepo;

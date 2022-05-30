@@ -18,7 +18,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
  */
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-@TestPropertySource("classpath:application_test.properties")
+//@TestPropertySource("classpath:application_test.properties")
 public class HttpRequestControllers {
 	@LocalServerPort
 	private int port;

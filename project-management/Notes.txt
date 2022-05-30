@@ -26,6 +26,8 @@ mv Simple-service.jar dockerwork
 // Run a jar file
 java -jar simple-service
 
+// Right Click project-management folder
+// Run as then Maven Install (Creates a jar file on the target directory)
 
 // Building the docker image with the dockerfile
 docker image build -t java-service-from-dockerfile .
