@@ -61,6 +61,7 @@ public class HomeController {
 		// Convert projectData Object into a JSON structure for Chart JS
 		ObjectMapper objectMapper = new ObjectMapper();
 		String jsonString = objectMapper.writeValueAsString(projectData);
+//		System.out.println(jsonString);
 		// Output : [ ["NOTSTARTED", 1], ["INPROGRESS", 2], ["COMPLETED", 1] ]
 		model.addAttribute("projectStatusCount", jsonString);
 		 
