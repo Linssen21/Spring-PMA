@@ -17,7 +17,7 @@ import javax.persistence.Table;
  */
 
 
-@Table(name = "user_accounts", schema = "pma-springbootdb")
+@Table(name = "user_accounts")
 @Entity
 public class UserAccount {
 	
