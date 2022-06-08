@@ -14,6 +14,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 /**
  * 
@@ -61,7 +63,7 @@ public class Employee {
 	public Employee() {
 		
 	}
-	
+	@JsonIgnore
 	public List<Project> getProjects() {
 		return projects;
 	}

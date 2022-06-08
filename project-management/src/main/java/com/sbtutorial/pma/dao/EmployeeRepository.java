@@ -22,8 +22,8 @@ public interface EmployeeRepository extends CrudRepository<Employee, Long> {
 	/**
 	 * Override the default Crud Repository findAll() which returns an Iterable
 	 */
-	@Override
-	public List<Employee> findAll();
+//	@Override
+//	public List<Employee> findAll();
 	
 	/**
 	 * Custom Query

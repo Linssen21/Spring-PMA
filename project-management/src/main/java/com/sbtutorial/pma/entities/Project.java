@@ -15,6 +15,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * 
  * @author Linssen
@@ -69,7 +71,12 @@ public class Project {
 	public Project() {
 		
 	}
-	
+	/**
+	 * Use @JsonIgnore Annotation to avoid error fetching data 
+	 * using REST
+	 * Ignores this field for serialization, causes infinite loop
+	 */
+	@JsonIgnore
 	public List<Employee> getEmployees() {
 		return employees;
 	}

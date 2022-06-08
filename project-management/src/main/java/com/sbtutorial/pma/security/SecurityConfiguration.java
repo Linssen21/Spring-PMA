@@ -79,7 +79,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 	 * hasAuthority - only expect if the field has an ADMIN value
 		 */
 		http.authorizeRequests()
-		
 		.antMatchers("/employees/new").hasRole("ADMIN")
 		.antMatchers("/employees/save").hasRole("ADMIN")
 		.antMatchers("/projects/save").hasAuthority("ADMIN")
@@ -88,9 +87,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 		.and().formLogin();
 //		.antMatchers("/h2_console/**").permitAll()
 //		.and().formLogin();
-		
-		
-//		http.csrf().disable();
+	
+		http.csrf().disable();
 //		http.headers().frameOptions().disable();
 	}
 
