@@ -29,7 +29,7 @@ public class EmployeeController {
 	@GetMapping
 	public String displayEmployees(Model model) {
 		 // Overrides the findAll to return a list of Project
-		List<Employee> employees = empService.getAll();
+		Iterable<Employee> employees = empService.getAll();
 		model.addAttribute("employeesList", employees);
 		
 		return "employees/list-employees";

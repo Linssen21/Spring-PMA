@@ -37,7 +37,7 @@ public class EmployeeService {
 	 * Fetch all data from the employee table
 	 * @return {@link List} of {@link Employee}
 	 */
-	public List<Employee> getAll() {
+	public Iterable<Employee> getAll() {
 		return employeeRepository.findAll();
 	}
 	

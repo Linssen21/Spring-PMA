@@ -2,8 +2,11 @@ package com.sbtutorial.pma.api.controllers;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -37,7 +40,7 @@ public class EmployeeApiController {
 	
 	@PostMapping(consumes = "application/json")
 	@ResponseStatus(HttpStatus.CREATED)
-	public Employee create(@RequestBody Employee employee) {
+	public Employee create(@Valid @RequestBody Employee employee) {
 		return empRepo.save(employee);
 	}
 	
@@ -48,7 +51,7 @@ public class EmployeeApiController {
 	 */
 	@PutMapping(path = "/{id}", consumes = "application/json")
 	@ResponseStatus(HttpStatus.OK)
-	private Employee update(@RequestBody Employee employee) {
+	private Employee update(@Valid @RequestBody Employee employee) {
 		return empRepo.save(employee);
 	}
 	
@@ -62,7 +65,7 @@ public class EmployeeApiController {
 	
 	@PatchMapping(path = "/{id}", consumes = "application/json")
 	@ResponseStatus(HttpStatus.OK)
-	private Employee partialUpdate(@PathVariable("id") Long id, @RequestBody Employee patchEmployee) {
+	private Employee partialUpdate(@Valid @PathVariable("id") Long id, @RequestBody Employee patchEmployee) {
 		
 		// Find employee by ID
 		Employee employee = empRepo.findById(id).get();

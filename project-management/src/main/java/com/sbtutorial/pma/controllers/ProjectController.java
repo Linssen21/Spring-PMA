@@ -48,7 +48,7 @@ public class ProjectController {
 		// Bind the form with the Project Model
 		Project aProject = new Project();
 		// Get List of employees
-		List<Employee> employees = employeeService.getAll();
+		Iterable<Employee> employees = employeeService.getAll();
 		model.addAttribute("project", aProject);
 		model.addAttribute("allEmployees", employees);
 		// Generate the view with new-project.html
