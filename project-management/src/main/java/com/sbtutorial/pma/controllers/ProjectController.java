@@ -34,7 +34,7 @@ public class ProjectController {
 	@GetMapping
 	public String displayProjects(Model model) {
 		 // Overrides the findAll to return a list of Project
-		List<Project> projects = projectService.getAll();
+		Iterable<Project> projects = projectService.getAll();
 		model.addAttribute("projectsList", projects);
 		
 		return "projects/list-projects";

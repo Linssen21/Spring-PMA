@@ -52,7 +52,7 @@ public class HomeController {
 		Map<String, Object> map = new HashMap<>();
 		
 		 // Overrides the findAll to return a list of Project
-		List<Project> projects = projectService.getAll();
+		Iterable<Project> projects = projectService.getAll();
 		 //Pass the data projectsList
 		model.addAttribute("projectsList", projects);
 		

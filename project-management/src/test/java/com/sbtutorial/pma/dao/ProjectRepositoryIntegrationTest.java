@@ -4,9 +4,12 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.util.Streamable;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.jdbc.Sql;
@@ -33,7 +36,7 @@ import com.sbtutorial.pma.entities.Project;
 @SpringBootTest
 @ExtendWith(SpringExtension.class)
 @SqlGroup({
-	@Sql(executionPhase = ExecutionPhase.BEFORE_TEST_METHOD, scripts = {"classpath:schema.sql", "classpath:data.sql"}), 
+	@Sql(executionPhase = ExecutionPhase.BEFORE_TEST_METHOD, scripts = {"classpath:drop.sql", "classpath:schema.sql", "classpath:data.sql"}), 
 	@Sql(executionPhase = ExecutionPhase.AFTER_TEST_METHOD, scripts = "classpath:drop.sql")
 })
 //@TestPropertySource("classpath:application_test.properties")
@@ -43,11 +46,13 @@ public class ProjectRepositoryIntegrationTest {
 	
 	@Test
 	public void ifNewProjectSaved_thenSuccess() {
+		// Create A Project Object
 		Project newProject = new Project("New Test Project", "COMPLETE", "Test Description");
+		// Save the project to the database
 		proRepo.save(newProject);
-		Iterable<Project> projTest = proRepo.findAll();
-		projTest.forEach((proj) -> System.out.println(proj.getName()));
-		assertEquals(13, proRepo.findAll().size());
+		// Create A list for Project
+		List<Project> projList = Streamable.of(proRepo.findAll()).toList();
+		assertEquals(5, projList.size());
 		
 	}
 	

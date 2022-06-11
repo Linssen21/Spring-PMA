@@ -21,7 +21,7 @@ public class ProjectService {
 	ProjectRepository projectRepository;
 	
 	
-	public List<Project> getAll() {
+	public Iterable<Project> getAll() {
 		return projectRepository.findAll();
 	}
 	
