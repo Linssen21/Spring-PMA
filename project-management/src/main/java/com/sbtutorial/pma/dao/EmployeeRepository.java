@@ -32,5 +32,15 @@ public interface EmployeeRepository extends CrudRepository<Employee, Long> {
 	 */
 	@Query(nativeQuery = true, value = "SELECT emp.first_name AS firstName, emp.last_name AS lastName, COUNT(proemp.employee_id) AS projectCount FROM EMPLOYEE emp left join project_employee proemp ON proemp.employee_id = emp.employee_id GROUP BY emp.first_name, emp.last_name ORDER BY 3 DESC;")
 	public List<EmployeeProject> employeeProject();
+	
+	/**
+	 * Spring is smart enough to get the Email from the database
+	 * Make sure the word with By - Email is the same on the  Employee entity
+	 * @param email
+	 * @return
+	 */
+	public Employee findByEmail(String email);
+	
+	public Employee findEmployeeByEmployeeId(long id);
 
 }

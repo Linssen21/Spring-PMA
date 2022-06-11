@@ -102,4 +102,16 @@ public class EmployeeRepository2 implements EmployeeRepository {
 		return null;
 	}
 
+	@Override
+	public Employee findByEmail(String email) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Employee findEmployeeByEmployeeId(long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
