@@ -2,10 +2,14 @@ package com.sbtutorial.pma.controllers;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -48,18 +52,24 @@ public class ProjectController {
 		// Bind the form with the Project Model
 		Project aProject = new Project();
 		// Get List of employees
-		Iterable<Employee> employees = employeeService.getAll();
+		this.fetchEmployee(model);
+		// Add New Project Instance
 		model.addAttribute("project", aProject);
-		model.addAttribute("allEmployees", employees);
 		// Generate the view with new-project.html
 		return "projects/new-project";
 	}
 	
+	protected void fetchEmployee(Model model) {
+		Iterable<Employee> employees = employeeService.getAll();
+		model.addAttribute("allEmployees", employees);
+	}
+	
+	// Update List<Long> employee to Optional<Long> selectedEmployees to make Request parameteres as optional
 	@PostMapping("/save")
-	public String createProject(Project project, @RequestParam List<Long> employees ,Model model) {
+	public String createProject(@RequestParam Optional<Long> selectedEmployees ,Model model, @Valid Project project, Errors errors) {
 		// this should handle saving to the database
-		// Automatically save the project with the List of Employees
-		projectService.save(project);
+//		// Automatically save the project with the List of Employees
+//		projectService.save(project);
 		// Find all by id based on the employee
 //		Iterable<Employee> chosenEmployee = employeeRepo.findAllById(employees);
 //		// Loop over the chosenEmployee and set the Project on the Employee table / Update the employee to set its Project Id field
@@ -68,7 +78,14 @@ public class ProjectController {
 //			employeeRepo.save(emp);
 //		}
 		
-	
+		// Error handling
+		if(errors.hasErrors()) {
+			this.fetchEmployee(model);
+			return "projects/new-project";
+		}
+		
+		// Automatically save the project with the List of Employees
+		projectService.save(project);
 		
 		// use a redirect to prevent duplicate submissions
 		return "redirect:/projects";

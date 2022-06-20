@@ -14,6 +14,11 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -39,9 +44,14 @@ public class Project {
 	@SequenceGenerator(name="project_seq", sequenceName="project_seq", allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "project_seq")
 	private long projectId;
+	
+	@NotBlank(message="Must Give a Project Name")
+	@Size(min = 3, max = 50)
 	private String name;
 	
+	@NotBlank(message="Must Select a Stage")
 	private String stage; 
+	
 	
 	private String description;
 	
@@ -65,6 +75,9 @@ public class Project {
 		joinColumns = @JoinColumn(name = "project_id"), 
 		inverseJoinColumns = @JoinColumn(name = "employee_id")
 	)
+	
+	@NotEmpty(message="Must Select an Employee")
+    @Valid
 	private List<Employee> employees;
 	
 	// Constructors
