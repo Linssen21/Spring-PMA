@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.stereotype.Repository;
 
 import com.sbtutorial.pma.dto.EmployeeProject;
@@ -21,6 +22,7 @@ import com.sbtutorial.pma.entities.Employee;
  */
 @Primary
 @Repository
+@RepositoryRestResource(collectionResourceRel = "api-employees", path = "api-employees")
 //@Profile("prod")
 public interface EmployeeRepository extends PagingAndSortingRepository<Employee, Long> {
 	/**
@@ -45,6 +47,6 @@ public interface EmployeeRepository extends PagingAndSortingRepository<Employee,
 	 */
 	public Employee findByEmail(String email);
 	
-	public Employee findEmployeeByEmployeeId(long id);
+	public Employee findByEmployeeId(long id);
 
 }

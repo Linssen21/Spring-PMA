@@ -15,6 +15,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -41,16 +42,16 @@ public class Employee {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "employee_seq")
 	private long employeeId;
 	
-	@NotNull
+	@NotBlank(message="Must Give a first name")
 	@Size(min = 2, max = 50)
 	private String firstName;
 	
-	@NotNull
+	@NotBlank(message="Must Give a last name")
 	@Size(min = 1, max = 50)
 	private String lastName;
 	
-	@NotNull
-	@Email
+	@NotBlank
+	@Email(message="Must be a valid email")
 	@Column(unique = true)
 	@UniqueValue
 	private String email;

@@ -112,7 +112,7 @@ public class EmployeeRepository2 implements EmployeeRepository {
 	}
 
 	@Override
-	public Employee findEmployeeByEmployeeId(long id) {
+	public Employee findByEmployeeId(long id) {
 		// TODO Auto-generated method stub
 		return null;
 	}

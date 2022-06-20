@@ -1,4 +1,4 @@
-package com.sbtutorial.pma.controllers;
+ package com.sbtutorial.pma.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;

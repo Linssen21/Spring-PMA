@@ -10,8 +10,12 @@ import com.sbtutorial.pma.entities.Employee;
 
 public class UniqueValidator implements ConstraintValidator<UniqueValue, String>{
 	@Autowired
-	EmployeeRepository empRepository;
+	private EmployeeRepository empRepository;
 	
+	 @Override
+	  public void initialize(UniqueValue constraintAnnotation) {
+		 
+	  }
 	
 	/**
 	 * spring.jpa.properties.javax.persistence.validation.mode = none;
@@ -20,13 +24,15 @@ public class UniqueValidator implements ConstraintValidator<UniqueValue, String>
 	@Override
 	public boolean isValid(String value, ConstraintValidatorContext context) {
 		
+		System.out.println(context);
 		System.out.println("Entered validation method..");
-		Employee employee = empRepository.findByEmail(value);
-		if (employee != null) {
-			return false;
-		}else {
-			return true;
-		}
+//		Employee employee = empRepository.findByEmail(value);
+//		if (employee != null) {
+//			return false;
+//		}else {
+//			return true;
+//		}
+		return true;
 	}
 
 }

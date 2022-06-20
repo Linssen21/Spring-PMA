@@ -48,6 +48,20 @@ public class EmployeeService {
 	public List<EmployeeProject> employeeProjects() {
 		return employeeRepository.employeeProject();
 	}
+
+	public Employee findByEmployeeId(Long id) {
+		// TODO Auto-generated method stub
+		return employeeRepository.findByEmployeeId(id);
+	}
+	
+	public Employee findByEmployeeEmail(String email) {
+		return employeeRepository.findByEmail(email);
+	}
+
+	public void delete(Employee employee) {
+		// TODO Auto-generated method stub
+		employeeRepository.delete(employee);
+	}
 	
 	
 	
